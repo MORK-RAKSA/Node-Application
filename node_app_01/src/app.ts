@@ -3,6 +3,8 @@ import swaggerUi from "swagger-ui-express";
 import { RegisterRoutes } from '@/src/routes/v1/routes';
 import fs from 'fs';
 import path from 'path'
+import loggerMiddleware from './middlewares/loggerMiddleware';
+// import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
 // import loggerMiddleware from './middlewares/loggerMiddleware';
 
 // Dynamically load swagger.json
@@ -17,7 +19,8 @@ const app = express();
 // Global Middleware
 // ========================
 app.use(express.json())  // Help to get the json from request body
-// app.use(loggerMiddleware);
+app.use(loggerMiddleware);
+// app.use(errorHandlerMiddleware);
 // ========================
 // Global API V1
 // ========================

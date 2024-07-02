@@ -1,5 +1,6 @@
+// /Users/morkraksa/Documents/Node Application/node_app_01/src/controllers/user.controller.ts
 // /Users/morkraksa/Documents/NextTest/testnode/src/controllers/user.controller.ts
-import { Controller, Route, Post, Get, Body, Path, Put, Delete } from 'tsoa';
+import { Controller, Route, Post, Get, Body, Path, Put, Delete, Query } from 'tsoa';
 import { IUser, UserCreationParams } from '../database/model/user.model';
 import { UserService } from '../services/userService';
 
@@ -10,9 +11,9 @@ export class UserController extends Controller {
   private userService: UserService = new UserService();
 
   @Get("/")
-  public async getAllUsers(): Promise<IUser[] | null> {
+  public async getAllUsers(@Query("sort") sort: string = "desc"): Promise<IUser[] | null> {
     try {
-      return this.userService.getAllUsers();
+      return this.userService.getAllUsers(sort);
     } catch (error) {
       console.error('Error getting all users:', error);
       throw new Error('Failed to get all users.');

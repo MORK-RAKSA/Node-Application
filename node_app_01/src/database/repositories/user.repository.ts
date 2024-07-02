@@ -1,3 +1,4 @@
+// /Users/morkraksa/Documents/Node Application/node_app_01/src/database/repositories/user.repository.ts
 // /Users/morkraksa/Documents/NextTest/testnode/src/database/repositories/user.repository.ts
 
 import User, { IUser } from "../model/user.model";
@@ -6,9 +7,15 @@ import User, { IUser } from "../model/user.model";
 
 class UserRepository {
 
-  public async getAllUsers(): Promise<IUser[]> {
+  public async getAllUsers(sort: string = "asc"): Promise<IUser[]> {
     try{
-      return User.find();
+      let sortQuery = {};
+      if (sort === "asc") {
+        sortQuery = { name: 1 }; // Sort by name in ascending order
+      } else if (sort === "desc") {
+        sortQuery = { name: -1 }; // Sort by name in descending order
+      }
+      return User.find().sort(sortQuery);
     }catch(error){
       console.error('Error getting users:', error);
       throw new Error('Failed to get users.');

@@ -1,3 +1,4 @@
+// /Users/morkraksa/Documents/Node Application/node_app_01/src/services/userService.ts
 // /Users/morkraksa/Documents/NextTest/testnode/src/services/userService.ts
 
 import UserRepository from "../database/repositories/user.repository";
@@ -10,9 +11,9 @@ export class UserService {
     this.userRepository = new UserRepository();
   }
 
-  public async getAllUsers(): Promise<IUser[]> {
+  public async getAllUsers(sort: string = "asc"): Promise<IUser[]> {
     try {
-      return this.userRepository.getAllUsers();
+      return this.userRepository.getAllUsers(sort);
     } catch (error) {
       console.error('Error getting all users:', error);
       throw new Error('Failed to get all users.');
